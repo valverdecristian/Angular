@@ -1,0 +1,11 @@
+CRONOGRAMA
+Semana 1: Introducción a Angular, Ts, componentes y blindeo.
+Semana 2: Ruteo, Input y output, Directivas estructurales, Validación de formularios.
+Semana 3: Introducción NoSQL, Conexión a base de datos en tiempo real (serverless), Servicios, peticiones HTTP.
+Semana 4: Deploy, Autentiacion con servicios externos (superbase), storage externo (supabase)
+Semana 5: Guardias de ruta, Pipes propias, directivas propias, service worker.
+Semana 6: PRIMER PARCIAL
+Semana 7: Introducción a NEST, estructura del proyecto, creación de la API.
+Semana 8: Modulos, Lazy-Loading, ciclo de vida.
+Semana 9: Providers, MongoDB, conexión a base de datos Mongo (mongoose)
+Semana10: Seguridad: autenticación JWT, limite de consultas.

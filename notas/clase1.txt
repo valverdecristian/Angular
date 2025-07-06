@@ -1,0 +1,53 @@
+ANGULAR
+- Documentación: crear aplicaciones rápidas
+- componentes
+- testing (no se evalúa en la cursada)
+
+HERRAMIENTAS NECESARIAS
+- Instalar Node: verificar con el comando "node -v"
+- Instalar Angular: npm install -g @angular/cli y luego verificar con el comando "ng --version"
+- En caso de tener un problema con la ejecución de scripts se debe abrir el PowerShell como **Administrador** (Ejecutar como administrador) y ejecutar el siguiente comando "Set-ExecutionPolicy RemoteSigned". Cuando pregunte escribir "Y" y presionar Enter y esto permitirá ejecutar scripts descargados solo si están firmados. Luego de esto cerrar y volver a abrir PowerShell y volver a ejecutar "npm install -g @angular/cli"
+- VS Code
+
+- Recordar: no usar espacios en proyectos
+
+CREANDO UN PROYECTO
+En el archivo "angular.json" va a estar toda la configuración del proyecto
+- Carpeta src:
+** index.html: dentro del body hay una sola tag <app-root></app-root> que es donde se renderiza el componente AppComponent
+** main.ts: levanta la aplicación en el app component
+**- Carpeta app:
+**** app.config.ts: provideZoneChangeDetection (función que permite personalizar o desactivar el uso de Zone.js (librería que Angular utiliza por defecto para detectar automáticamente los cambios y actualizar la vista))
+>>>>>> provideRouter: permite que nuestra app tenga rutas virtuales
+**** app.routes.ts: array de rutas donde definimos todas las rutas de nuestra aplicación.
+**** app.component.ts: es el componente principal de nuestra app (cada componente de nuestra app va a ser un pequeño empaquetado)
+>>>>>> selector: este atributo indica como se va a insertar o invocar ese componente en el HTML. En definitiva en el archivo HTML buscar <app-root></app-root>
+>>>>>> templateUrl: apunta al archivo HTML del componente.
+
+
+Para renderizar pagina de Angular usar los comandos:
+ng serve
+
+conceptos:
+
+componentes: los componentes son clases, pero las clases no son componentes. Todos los componentes son de instancia. La clase se convierte en un componente por el decorador @Component.
+
+router-outlet: etiqueta que le dice a Angular donde debe cargar los componentes de las rutas.
+binding/bindeo (enlace de datos):
+
+** blindeo desde ts al HTML: Se usa para mostrar datos del .ts en el HTML.
+**** interpolacion: {{variable}}
+**** atributo: [atributo]="valor"
+
+** blindeo desde el HTML a ts: Se usa para llamar funciones de la clase desde el HTML cuando ocurre un evento (como un clic). 📌 Esto se llama Event Binding. Se usan paréntesis () para capturar el evento y llamar un método de la clase.
+
+CREAR COMPONENTES (comandos)
+ng generate component NOMBRE_CARPETA/otra_carpeta
+forma abreviada: ng g c NOMBRE_CARPETA/otra_carpeta
+
+ARCHIVO:app.component.html
+para usar routerLink se debe importar RouterLink en app.component.ts
+
+RESUMEN DE CLASE
+* como funciona y crear un componente
+* como crear y navegar las rutas

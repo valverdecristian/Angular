@@ -1,0 +1,26 @@
+CREAR EL PROYECTO DE LA CLASE 2
+ng new clase02
+yes
+css
+NO ServerSRender
+
+Estructura del proyecto:
+ng g c pages/bienvenida
+
+📌 CICLO DE VIDA DE UN COMPONENTE
+- Es la serie de pasos que Angular ejecuta automáticamente desde que el componente se crea, se actualiza, y finalmente se destruye.
+- En cada una de esas etapas, Angular llama a métodos especiales llamados hooks (ganchos), si tu componente los implementa.
+
+📋 Ciclo de Vida más común (simplificado)
+1. constructor() — Se ejecuta al crear la instancia de la clase (no accede aún al HTML).
+2. ngOnChanges() — Se ejecuta cuando cambian los inputs del componente (si hay @Input()).
+3. ngOnInit() — Se ejecuta una sola vez, cuando Angular ya terminó de inicializar el componente.
+4. ngDoCheck() — Se ejecuta cuando Angular verifica cambios (ciclo de detección).
+5. ngAfterContentInit() — Se ejecuta después de que el contenido del componente ha sido inicializado.
+5. ngOnDestroy() — Se ejecuta antes de destruir el componente, ideal para limpiar timers, subscripciones, etc.
+🛠IMPORTANTE: Angular recomienda que ESTOS METODOS SE USEN IMPLEMENTANDO LA *INTERFACE* CORRESPONDIENTE. Así ts nos avisara si olvidamos escribir dicho método.
+- Los mas usados serian: OnInit y OnDestroy.
+
+NO OLVIDAR: en los siguientes archivos:
+- app.component.ts: agregar RouterLink en imports
+- app.routes.ts: agregar la ruta de los nuevos componentes generados
