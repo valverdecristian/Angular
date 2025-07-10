@@ -1,7 +1,8 @@
 ANGULAR
 - Documentación: crear aplicaciones rápidas
-- componentes
-- testing (no se evalúa en la cursada)
+- Componentes
+- Directivas
+- Testing (no se evalúa en la cursada)
 
 HERRAMIENTAS NECESARIAS
 - Instalar Node: verificar con el comando "node -v"
@@ -36,7 +37,7 @@ router-outlet: etiqueta que le dice a Angular donde debe cargar los componentes 
 binding/bindeo (enlace de datos):
 
 ** blindeo desde ts al HTML: Se usa para mostrar datos del .ts en el HTML.
-**** interpolacion: {{variable}}
+**** interpolación: {{variable}}
 **** atributo: [atributo]="valor"
 
 ** blindeo desde el HTML a ts: Se usa para llamar funciones de la clase desde el HTML cuando ocurre un evento (como un clic). 📌 Esto se llama Event Binding. Se usan paréntesis () para capturar el evento y llamar un método de la clase.

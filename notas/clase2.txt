@@ -1,6 +1,5 @@
 CREAR EL PROYECTO DE LA CLASE 2
 ng new clase02
-yes
 css
 NO ServerSRender
 
@@ -24,3 +23,52 @@ ng g c pages/bienvenida
 NO OLVIDAR: en los siguientes archivos:
 - app.component.ts: agregar RouterLink en imports
 - app.routes.ts: agregar la ruta de los nuevos componentes generados
+
+* LOS CORCHETES SOLO HACEN FALTA CUANDO QUEREMOS REFERENCIAR VARIABLES
+* LO MAS COMUN ES QUE EL COMPONENTE PADRE SEA UNA RUTA y los componentes hijos estén instanciados dentro de la ruta.
+* Al usar input, en el HTML tengo que cambiar la variable a método. Ejemplo: "imagen" cambia a "imagen()"
+
+script:
+<app-card></app-card>
+<app-card texto="esto se va a poner feo" imagen="img2.jpg"></app-card>
+<app-card texto="no me quemes" imagen="img3.jpg"></app-card>
+
+
+📌 Una DIRECTIVA es una intruccion que le dice a Angular como debe comportarse un elemento del DOM o un componente.
+
+Tipos de directivas:
+- Estructural: cambian el diseño del DOM, por ejemplo, agregar o quitar elementos. *ngIf, *ngFor, *ngSwitch
+- Atributo: cambian la apariencia o comportamiento de un elemento existente. ngClass, ngStyle
+- Personalizada: Comportamiento definido por nosotros.
+
+📌 RECORDATORIOS
+✅ 1. InputSignal se importa de @angular/core
+script: import { Component, InputSignal, input } from '@angular/core';
+InputSignal una versión reactiva de @Input(), basada en Signals
+
+✅ 2. Signal vs InputSignal
+- Signal: Estado interno local, vive y muere en el mismo componente.
+- InputSignal: Estado que recibís, depende de otro componente.
+
+---------------------------------------------------------------
+
+TAREA - Input y Output
+1. Crear un proyecto vacío.
+2. Crear las pages: Login, Bienvenida, Error, Autos y sus respectivas rutas en el router.
+3. Buscar en internet plantillas HTML, para login, bienvenida y error.
+Nota también pueden hacer la suya propia, pero no recomiendo que usen su tiempo en eso.
+Links de paginas que tienen ejemplos:
+- https://getbootstrap.com/docs/5.3/examples
+- https://plantillashtmlgratis.com
+- https://cssauthor.com/html5-and-css3-login-forms/
+4. Crear los componentes: alta-auto, listado-auto, detalle-auto.
+5. Hacer los componentes del punto 4 hijos de la page Auto.
+6. Crear la clase Auto, la cual cuenta con los atributos:
+- marca:string, modelo:string, precio:number
+7. En la page Auto crear un array de Autos.
+8. El componente alta-auto posee los inputs para cargar un auto y un output para enviarlo al componente padre.
+9. El componente listado-auto muestra el listado de autos por input.
+10. El componente listado-auto envia por output un auto seleccionado. Nota: agregar un botón a cada elemento del @for.
+11. La page Auto recibe el auto seleccionado y lo envia al componente detalle-auto.
+12. El componente detalle-auto muestra el auto seleccionado del listado.
+13. El componente listado-auto posee un botón para eliminar el auto seleccionado del array ubicado en el componente padre (output)
