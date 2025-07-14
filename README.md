@@ -26,8 +26,8 @@ ng generate component NOMBRE_CARPETA/otra_carpeta
 ## 📌 Blindeo
 
 ### 📍 Desde el TS al HTML
-- Interpolacion
-- Atributo
+- Interpolacion: {{variable}}
+- Atributo: [atributo]="valor"
 
 ### 📍 Desde el HTML al TS
 - Event Blinding

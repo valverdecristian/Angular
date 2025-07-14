@@ -1,0 +1,19 @@
+<h1> {{title}}</h1> <!-- blindeo: interpolacion -->
+
+<button (click)="mostrarTitulo()">Mostrar</button> <!-- blindeo: evento -->
+
+<h2 [className]="estilos">Titulo Estatico</h2> <!-- blindeo: atributos -->
+
+<!-- blindeo: bidireccional -->
+<!-- se debe importar FormsModule en app.component.ts para usar ngModel -->
+<input type="text" [(ngModel)]="nombre" />
+<button (click)="borrarNombre()">Borrar Nombre</button>
+<span>{{nombre}}</span>
+
+<h2>Componentes</h2>
+
+<app-bienvenida></app-bienvenida>
+
+<h2>Login</h2>
+
+<app-login></app-login>
