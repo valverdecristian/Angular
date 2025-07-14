@@ -37,7 +37,9 @@ script:
 📌 Una DIRECTIVA es una intruccion que le dice a Angular como debe comportarse un elemento del DOM o un componente.
 
 Tipos de directivas:
-- Estructural: cambian el diseño del DOM, por ejemplo, agregar o quitar elementos. *ngIf, *ngFor, *ngSwitch
+- Estructural: cambian el diseño del DOM, por ejemplo, agregar o quitar elementos.
+	- Clasica: *ngIf, *ngFor, *ngSwitch
+	- Moderno: @if, @for, @switch, @case, @default
 - Atributo: cambian la apariencia o comportamiento de un elemento existente. ngClass, ngStyle
 - Personalizada: Comportamiento definido por nosotros.
 

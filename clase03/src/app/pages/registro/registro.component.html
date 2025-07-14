@@ -1,1 +1,55 @@
-<p>registro works!</p>
+<h1 class="fw-bold">Registro</h1>
+
+@if (form !== undefined) {
+    <form [formGroup]="this.form">
+        <label for="formGroupExampleInput">Nombre: </label>
+        <!-- formControlName = debe coincidir con el nombre del control -->
+        <input class="form-control" type="text" formControlName="nombre">
+
+        @if (getNombre?.errors !== null && getNombre?.touched) {
+            @if (getNombre?.hasError("required")) {
+                <p class="alert alert-danger">El nombre es requerido</p>
+            }
+            @if (getNombre?.hasError("minlength")) {
+                <p class="alert alert-danger">Minimo de 3 caracteres</p>
+            }
+            @if (getNombre?.hasError("maxlength")) {
+                <p class="alert alert-danger">Maximo de 15 caracteres</p>
+            }
+        }
+
+        <br>
+
+        <label for="formGroupExampleInput">Apellido: </label>
+        <input class="form-control" type="text" formControlName="apellido">
+
+        @if (getApellido?.errors !== null && getApellido?.touched) {
+            @if (getApellido?.hasError("required")) {
+                <p class="alert alert-danger">El apellido es requerido</p>
+            }
+            @if (getApellido?.hasError("minlength")) {
+                <p class="alert alert-danger">Minimo de 3 caracteres</p>
+            }
+            @if (getApellido?.hasError("maxlength")) {
+                <p class="alert alert-danger">Maximo de 15 caracteres</p>
+            }
+        }
+
+        <br>
+
+        @if (this.flag &&
+            (form.controls["nombre"].errors !== null ||
+            form.controls["apellido"].errors !== null))
+        {
+            <p class="alert alert-danger">Hay un error en alguno de los campos</p>
+        } @else if (this.flag) {
+            <p class="alert alert-success">Todos los campos son correctos</p>
+        }
+        
+        <div style="display: flex; justify-content: space-between; gap: 10px;width: 100%;">
+            <button (click)="mostrarFormulario()" class="btn btn-info">Mostrar Form</button>
+            <button (click)="validarFormulario()" [disabled]="!this.form.valid" class="btn btn-success">Validar</button>
+            <button (click)="guardarDatos()" [disabled]="!this.form.valid" class="btn btn-secondary">Guardar Datos</button>
+        </div>
+    </form>
+}

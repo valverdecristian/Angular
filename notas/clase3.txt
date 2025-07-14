@@ -2,3 +2,52 @@ Clase 03
 * Validación de formularios
 * ServerLest
 * Superbase
+
+- para agregar Bootstrap al proyecto:
+ng add @ng-bootstrap/ng-Bootstrap
+
+📌 FORMULARIOS EN ANGULAR
+- Formularios Reactivos:
+	1) Estructura en ts: FormGroup, FormControl y FormBuilder
+	2) Se usan para validar (Validators), mostrar errores (FormControlName) y controlar campos dinámicos.
+- Formularios por Template
+
+📌 INYECCION DE DEPENDENCIAS
+- Angular usa DI (Dependency Injection) para no acoplar codigo.
+- Un servicio es una clase que encapsula lógica y datos compartidos.
+
+📋 Creando un servicio Inyectable
+comando: ng generate service <RUTA AL ARCHIVO>
+ejemplo: ng generate service services/auth
+
+hay dos formas de inyectar un servicio:
+- Antes (Clasica): a través del contructor, por parámetro llegaba un servicio (accesibilidad, nombre y servicio) Ejemplo: constructor (private auth: AuthService) {...}
+- Moderna (Angular 14+): auth = inject(AuthService);
+✅ Usar la nueva inject() para menos codigo y mas claridad (sobre todo en signals o standalone components)
+
+en el servicio lo único que vamos a hacer por ahora es una clase con atributos y métodos.
+
+📍 Patrón SINGLETON
+✔️ Cuando registrás un servicio como providedIn: 'root', Angular lo mantiene como Singleton.
+✔️ Esto significa que solo existe UNA instancia en toda la app.
+✔️ Todos los componentes o servicios que lo inyecten trabajan con la misma instancia, compartiendo datos y estado.
+
+📍 Mini resumen del flujo
+- ng generate service crea el archivo y lo hace @Injectable.
+- Lo registrás como providedIn: 'root' para que sea Singleton.
+- Lo inyectás donde lo necesites (constructor o inject()).
+- Lo usás para compartir lógica y datos entre componentes.
+
+📍 Servicios vs. Input/Output en Angular
+✅ Input/Output:
+	- Comunicación directa entre padre e hijo. Emitir eventos hacia arriba (al padre).
+	- Padre → Hijo → Padre (solo jerarquía directa)
+✅ Servicios:
+	- Compartir estado entre componentes, logica de negocio y conexiones a APIs, datos persistentes y no hay relacion directa Padre-Hijo.
+	- Compartir estado global o logica entre componentes que no tienen jerarquia directa → todos usan la misma instancia (Singleton)
+
+👉 Ejemplo real
+❌ Mal uso de Input/Output:
+Pasar datos entre componentes hermanos lejanos propagando Output por 4 niveles de padres → confuso, frágil.
+✅ Buen uso de Servicio:
+Crear un UserService que maneje el usuario logueado → todos los componentes leen/escriben ese dato sin importar dónde estén.
