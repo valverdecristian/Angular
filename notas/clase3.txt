@@ -7,10 +7,10 @@ Clase 03
 ng add @ng-bootstrap/ng-Bootstrap
 
 📌 FORMULARIOS EN ANGULAR
-- Formularios Reactivos:
+- 📢 Formularios Reactivos:
 	1) Estructura en ts: FormGroup, FormControl y FormBuilder
 	2) Se usan para validar (Validators), mostrar errores (FormControlName) y controlar campos dinámicos.
-- Formularios por Template
+- 📢 Formularios por Template
 
 📌 INYECCION DE DEPENDENCIAS
 - Angular usa DI (Dependency Injection) para no acoplar codigo.
@@ -20,7 +20,7 @@ ng add @ng-bootstrap/ng-Bootstrap
 comando: ng generate service <RUTA AL ARCHIVO>
 ejemplo: ng generate service services/auth
 
-hay dos formas de inyectar un servicio:
+📢 hay dos formas de inyectar un servicio:
 - Antes (Clasica): a través del contructor, por parámetro llegaba un servicio (accesibilidad, nombre y servicio) Ejemplo: constructor (private auth: AuthService) {...}
 - Moderna (Angular 14+): auth = inject(AuthService);
 ✅ Usar la nueva inject() para menos codigo y mas claridad (sobre todo en signals o standalone components)

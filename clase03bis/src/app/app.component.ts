@@ -1,12 +1,19 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { ApiService } from './services/api.service';
+import { FormsModule } from '@angular/forms';
+// import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'clase03bis';
+  apiService = inject(ApiService);
+  nombre: string = "";
+
+  traer() {
+    this.apiService.traerPorNombre(this.nombre);
+  }
 }

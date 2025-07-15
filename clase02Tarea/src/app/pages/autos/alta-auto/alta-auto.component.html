@@ -1,0 +1,6 @@
+<form [formGroup]="formulario">
+    <input type="text" formControlName="modelo" placeholder="Modelo" />
+    <input type="text" formControlName="marca" placeholder="Marca" />
+    <input type="number" formControlName="precio" placeholder="Precio" />
+    <button (click)="guardar()">Guardar</button>
+</form>

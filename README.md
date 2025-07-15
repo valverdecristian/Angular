@@ -1,5 +1,6 @@
 ## 📌 Componentes
-los componentes son clases, pero las clases no son componentes. Todos los componentes son de instancia. La clase se convierte en un componente por el decorador @Component.
+
+Los componentes son clases, pero las clases no son componentes. Todos los componentes son de instancia. La clase se convierte en un componente por el decorador @Component.
 
 ```ts
 ng generate component NOMBRE_CARPETA/otra_carpeta
@@ -18,6 +19,7 @@ ng generate component NOMBRE_CARPETA/otra_carpeta
 - Los mas usados serian: OnInit y OnDestroy.
 
 ### 📍 Comunicacion entre componentes
+
 - Input clasico (@input): Decorador para recibir datos del padre.
 - Input moderno (InputSignal): Nueva forma reactiva.
 - Output (@Output): Decorador para emitir eventos hacia el padre.
@@ -26,13 +28,16 @@ ng generate component NOMBRE_CARPETA/otra_carpeta
 ## 📌 Blindeo
 
 ### 📍 Desde el TS al HTML
+
 - Interpolacion: {{variable}}
 - Atributo: [atributo]="valor"
 
 ### 📍 Desde el HTML al TS
+
 - Event Blinding
 
 ## 📌 Directivas
+
 - Estructural
     * Clasico: *ngIf, *ngFor, *ngSwitch
     * Moderno: @if, @for, @switch, @case, @default
@@ -64,6 +69,7 @@ ng generate service <RUTA AL ARCHIVO>
 ```
 
 ### 📍 Dos formas de inyectar un servicio:
+
 - Antes (Clasica): a través del contructor, por parámetro llegaba un servicio (accesibilidad, nombre y servicio) Ejemplo: constructor (private auth: AuthService) {...}
 - Moderna (Angular 14+): auth = inject(AuthService);
 - ✅ Usar la nueva inject() para menos codigo y mas claridad (sobre todo en signals o standalone components)
@@ -91,7 +97,22 @@ ng generate service <RUTA AL ARCHIVO>
 	- Compartir estado global o logica entre componentes que no tienen jerarquia directa → todos usan la misma instancia (Singleton)
 
 ### 👉 Ejemplo real
+
 - ❌ Mal uso de Input/Output:
 - Pasar datos entre componentes hermanos lejanos propagando Output por 4 niveles de padres → confuso, frágil.
 - ✅ Buen uso de Servicio:
 - Crear un UserService que maneje el usuario logueado → todos los componentes leen/escriben ese dato sin importar dónde estén.
+
+### 📍 Comunicación con servicios backend mediante HTTP
+
+- **`HttpClient`**:
+    - Para hacer peticiones HTTP (GET, POST, PUT, DELETE).
+        1) Estas peticiones retornan un **Observable**, por lo que debe suscribirse con `.suscribe()`.
+        2) Se recomienda usar **interceptores**.
+    - Se usa para conectar la app con APIs REST.
+    - Se debe configurar mediante inyección de dependencia.
+    - Para proyectos **standalone (Angular 15+)**, se debe agregar `provideHttpClient()` en `providers` del archivo **app.config.ts**.
+    - Funcion predeterminada: XMLHttpRequest
+    - Funciones opcionales:
+        1) withFetch()
+        2) withInterceptors()

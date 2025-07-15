@@ -1,0 +1,12 @@
+<h1>LISTADO:</h1>
+
+@for (auto of autos(); track auto) {
+    <div>
+        <h4>{{auto.marca}}</h4>
+        <p>{{auto.modelo + " $" + auto.precio}}</p>
+    </div>
+
+    <div>
+        <button (click)="seleccionarUnAuto(auto)">Seleccionar</button>
+    </div>
+}
