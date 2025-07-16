@@ -1,12 +1,18 @@
 <h1>LISTADO:</h1>
 
-@for (auto of autos(); track auto) {
-    <div>
-        <h4>{{auto.marca}}</h4>
-        <p>{{auto.modelo + " $" + auto.precio}}</p>
-    </div>
-
-    <div>
-        <button (click)="seleccionarUnAuto(auto)">Seleccionar</button>
+@for (auto of autos(); track auto; let indice = $index) {
+    <div class="mb-4">
+        <div class="card bg-light mb-1" style="max-width: 18rem;">
+            <div class="card-header">{{auto.marca}}</div>
+            <div class="card-body">
+                <p class="card-title">{{auto.modelo}}</p>
+                <p class="card-text">{{"$" + auto.precio}}</p>
+            </div>
+        </div>
+    
+        <div class="btn-group">
+            <button (click)="seleccionarUnAuto(auto)" class="btn btn-success">Seleccionar</button>
+            <button (click)="seleccionarUnIndice(indice)" class="btn btn-danger">Eliminar</button>
+        </div>
     </div>
 }

@@ -9,10 +9,18 @@ import { Auto } from '../../../models/auto';
 })
 export class ListadoAutoComponent {
   autos = input<Auto[]>([]);
+
+  enviarUnAuto = output<Auto>();
+  enviarUnIndice = output<number>();
+
   autoSeleccionado = output<Auto>();
   autoEliminar = output<Auto>();
 
   seleccionarUnAuto(auto: Auto): void {
     this.autoSeleccionado.emit(auto);
+  }
+
+  seleccionarUnIndice(indice: number): void {
+    this.enviarUnIndice.emit(indice);
   }
 }

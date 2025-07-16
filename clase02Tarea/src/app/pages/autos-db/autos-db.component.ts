@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
-import { AltaAutoComponent } from './alta-auto/alta-auto.component';
-import { ListadoAutoComponent } from './listado-auto/listado-auto.component';
-import { DetalleAutoComponent } from './detalle-auto/detalle-auto.component';
 import { Auto } from '../../models/auto';
+import { AltaAutoComponent } from '../autos/alta-auto/alta-auto.component';
+import { ListadoAutoComponent } from '../autos/listado-auto/listado-auto.component';
+import { DetalleAutoComponent } from '../autos/detalle-auto/detalle-auto.component';
 
 @Component({
-  selector: 'app-autos',
+  selector: 'app-autos-db',
   imports: [AltaAutoComponent, ListadoAutoComponent, DetalleAutoComponent],
-  templateUrl: './autos.component.html',
-  styleUrl: './autos.component.css'
+  templateUrl: './autos-db.component.html',
+  styleUrl: './autos-db.component.css'
 })
-export class AutosComponent {
+export class AutosDBComponent {
   autos: Auto[] = [
     new Auto('Toyota', 'Corolla', 20000),
     new Auto('Ford', 'Focus', 22000),

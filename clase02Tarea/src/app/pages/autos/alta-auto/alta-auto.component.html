@@ -2,5 +2,11 @@
     <input type="text" formControlName="modelo" placeholder="Modelo" />
     <input type="text" formControlName="marca" placeholder="Marca" />
     <input type="number" formControlName="precio" placeholder="Precio" />
-    <button (click)="guardar()">Guardar</button>
+    <button (click)="guardar()" class="btn btn-primary">Guardar</button>
 </form>
+
+<!-- otra forma de hacer lo mismo usando ngModel
+<input [(ngModel)]="modelo">
+<input [(ngModel)]="marca">
+<input [(ngModel)]="precio">
+-->

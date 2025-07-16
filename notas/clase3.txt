@@ -4,7 +4,7 @@ Clase 03
 * Superbase
 
 - para agregar Bootstrap al proyecto:
-ng add @ng-bootstrap/ng-Bootstrap
+ng add @ng-bootstrap/ng-bootstrap
 
 📌 FORMULARIOS EN ANGULAR
 - 📢 Formularios Reactivos:

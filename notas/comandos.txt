@@ -1,0 +1,32 @@
+- para renderizar la pagina:
+ng serve
+ng s
+
+- para crear un componente:
+ng generate component <ruta>
+ng g c <ruta>
+
+- para crear una pagina (organizada):
+ng g c pages/<nombre>
+
+- para agregar Bootstrap al proyecto:
+ng add @ng-bootstrap/ng-bootstrap
+
+- para crear un servicio:
+ng generate service <ruta>
+ng g s <ruta>
+
+- para crear una clase:
+ng generate class <ruta>
+ng g cl <ruta>
+
+- para crear una directiva:
+ng generate directive <ruta>
+ng g d <ruta>
+
+- para crear un pipe:
+ng generate pipe <ruta>
+ng g p <ruta>
+
+- para mantener organizado:
+pages/, components/, services/, models/

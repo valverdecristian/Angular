@@ -9,6 +9,7 @@ export const routes: Routes = [
   { path: 'bienvenida', component: BienvenidaComponent },
   { path: 'error', component: ErrorComponent },
   { path: 'autos', component: AutosComponent },
+  { path: 'db', component: AutosComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: 'error' },
 ];
