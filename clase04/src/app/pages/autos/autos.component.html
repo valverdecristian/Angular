@@ -1,0 +1,11 @@
+<h1>Autos</h1>
+
+<app-alta-auto (enviarAuto)="agregarAuto($event)"></app-alta-auto>
+
+<app-listado-auto
+  [autos]="autos"
+  (autoSeleccionado)="seleccionarAuto($event)"
+  (enviarUnIndice)="eliminarPorIndice($event)">
+</app-listado-auto>
+
+<app-detalle-auto [auto]="autoSeleccionado"></app-detalle-auto>

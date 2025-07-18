@@ -13,8 +13,8 @@ ng g c pages/<nombre>
 ng add @ng-bootstrap/ng-bootstrap
 
 - para crear un servicio:
-ng generate service <ruta>
-ng g s <ruta>
+ng generate service services/<nombre>
+ng g s services/<nombre>
 
 - para crear una clase:
 ng generate class <ruta>
