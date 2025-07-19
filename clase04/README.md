@@ -32,3 +32,8 @@ const supabase = createClient('https://wtjylfdfdwowzzvunlpa.supabase.co', 'publi
 ```ts
 databaseService = inject(DatabaseService);
 ```
+
+## Crear una bd en supabase
+
+1. Ir a database
+2. Crear nueva tabla
