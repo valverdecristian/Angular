@@ -1,9 +1,9 @@
-<h1>Autos</h1>
+<h1>Autos: supabase</h1>
 
 <app-alta-auto (enviarAuto)="agregarAuto($event)"></app-alta-auto>
 
 <app-listado-auto
-  [autos]="autos"
+  [autos]="autos()"
   (autoSeleccionado)="seleccionarAuto($event)"
   (enviarUnIndice)="eliminarPorIndice($event)">
 </app-listado-auto>

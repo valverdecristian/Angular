@@ -33,7 +33,32 @@ const supabase = createClient('https://wtjylfdfdwowzzvunlpa.supabase.co', 'publi
 databaseService = inject(DatabaseService);
 ```
 
+5. Politicas de privacidad:
+Es necesario crear una politica de privacidad para indicar que condiciones se deben cumplir para poder acceder a los datos de la tabla, de lo contrario la consulta a la misma devolvera un array vacio.
+Otra opcion es deshabilitar (RLS) mientras está en modo desarrollo para acceder a los datos.
+
+6. Insertar datos en tabla: utiliza los metodos from e insert para indicar el nombre de la tabla donde quieres insertar los datos y el objeto con los valores a insertar
+
+```ts
+export class DatabaseService {
+  private supabase: SupabaseClient;
+  constructor() {
+    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    this.supabase.from("autos").insert([
+      { marca: "Citroen", modelo: "C3", precio: 157000 }]).then(({ data, error }) => {
+        console.log(data);
+        console.log(error);
+      });
+  }
+}
+```
+
 ## Crear una bd en supabase
 
 1. Ir a database
 2. Crear nueva tabla
+
+## Spread Operator
+
+Sirve para descomponer un objeto en sus propiedades.
+Se crea una nueva copia del objeto, extrayendo sus propiedades.

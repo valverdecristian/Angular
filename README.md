@@ -116,3 +116,24 @@ ng generate service <RUTA AL ARCHIVO>
     - Funciones opcionales:
         1) withFetch()
         2) withInterceptors()
+
+
+## 📌 Autenticacion
+
+### 📍 Autenticación con Supabase
+
+- Supabase provee un sistema de autenticación completo (registro, login, sesión, recuperación).
+- Utiliza JWT y permite autenticación con email/contraseña o OAuth (Google, GitHub, etc.).
+
+### Metodos implementados
+
+```ts
+// Crear cuenta
+supabase.auth.signUp({ email, password })
+
+// Iniciar sesión
+supabase.auth.signInWithPassword({ email, password })
+
+// Cerrar sesión
+supabase.auth.signOut()
+```

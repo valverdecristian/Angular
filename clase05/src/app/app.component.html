@@ -1,0 +1,20 @@
+<nav>
+  <button routerLink="/home" class="btn btn-outline-info">Home</button>
+  <button routerLink="/login" class="btn btn-outline-info">Login</button>
+  <button routerLink="/registro" class="btn btn-outline-info">Registro</button>
+  <button routerLink="/error" class="btn btn-outline-info">Error</button>
+</nav>
+
+<div>
+  <button (click)="crearCuenta()" class="btn btn-primary">Crear Cuenta</button>
+  <button (click)="iniciarSeccion()" class="btn btn-success">Iniciar Seccion</button>
+</div>
+
+<div>
+  @if (authService.user()) {
+    <h3>Bienvenido: {{this.authService.user()!.email}}</h3>
+    <button (click)="cerrarSeccion()" class="btn btn-danger">Cerrar Seccion</button>
+  }
+</div>
+
+<router-outlet />
