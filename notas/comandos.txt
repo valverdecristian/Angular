@@ -30,3 +30,16 @@ ng g p <ruta>
 
 - para mantener organizado:
 pages/, components/, services/, models/
+
+- para crear un guard:
+ng generate guard guards/mi-guard
+
+
+PASOS PARA UN PROYECTO NUEVO:
+1. ng new nombreProyecto
+2. ng add @ng-bootstrap/ng-bootstrap
+3. ng g c pages/nombre (depende de la cantidad necesaria)
+4. configurar las rutas (en app.routes.ts)
+5. agregar botones de navegacion (en app.component.html)
+6. agregar RouterLink en app.component.ts
+7. ng s -o

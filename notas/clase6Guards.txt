@@ -1,0 +1,21 @@
+¿Como podemos hacer una navegacion anidada / navegacion hija?
+- Usamos la propiedad `children` dentro del path principal.
+- Los componentes hijos se renderizan dentro del <router-outlet> del componente padre.
+
+Concepto de Lazy Loading (Carga Perezosa)
+- Significa que el componente o modulo se carga solo cuando se necesita, no al inicio de la app.
+- Uso: para mejorar el rendimiento inicial de carga.
+
+```ts
+{
+  path: 'home',
+  loadComponent: () => import('./pages/home/home.component')
+    .then(m => m.HomeComponent)
+}
+```
+
+¿Como podemos hacer que los componentes no carguen todos juntos?
+- Con Lazy Loading
+
+¿Como podemos bloquear rutas dependiendo de ciertas condiciones?
+- Con guards

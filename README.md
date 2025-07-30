@@ -137,3 +137,50 @@ supabase.auth.signInWithPassword({ email, password })
 // Cerrar sesión
 supabase.auth.signOut()
 ```
+
+## 📌 Guards
+
+### 📍 ¿Como podemos hacer una navegacion anidada / navegacion hija?
+
+- Usamos la propiedad `children` dentro del path principal.
+- Los componentes hijos se renderizan dentro del <router-outlet> del componente padre.
+- En el template del padre debe existir router-outlet
+
+### 📍 Concepto de Lazy Loading (Carga Perezosa)
+
+- Significa que el componente/modulo se carga solo cuando se necesita (cuando se navega a esa ruta) no al inicio de la app.
+- Uso: para mejorar el rendimiento inicial de carga.
+- Se aplica a componentes con loadComponent o a modulos con loadChildren.
+
+```ts
+{
+  path: 'home',
+  loadComponent: () => import('./pages/home/home.component')
+    .then(m => m.HomeComponent)
+}
+```
+
+- Ejemplo con loadChildren (para modulos)
+```ts
+{
+  path: 'admin',
+  loadChildren: () => import('./admin/admin.module')
+    .then(m => m.AdminModule)
+}
+```
+
+### 📍 Bloquear Rutas con Guards
+
+- canActate, canLoad, etc. (para proteger rutas)
+- Se usan para controlar el acceso a rutas basándose en condiciones (por ejemplo si el usuario esta logueado)
+- Un `guard` es una clase que decide si una ruta puede ser accedida o no.
+- Si el guard devuelve un false o un observable que emite false, la navegacion se cancela.
+
+```ts
+{
+  path: 'admin',
+  loadComponent: () => import('./admin/admin.component')
+    .then(m => m.AdminComponent),
+  canActivate: [AuthGuard]
+}
+```
