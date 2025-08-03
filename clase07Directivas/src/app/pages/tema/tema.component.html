@@ -1,0 +1,55 @@
+<div class="tema-wrapper">
+  <h2 class="titulo">📌 Tema: Pipes y Directivas</h2>
+
+  @if (mostrarInfo()) {
+    <section class="bloque">
+      <h3 appResaltar>🔧 Directivas Modernas</h3>
+      <p>
+        Angular 19 introduce directivas como <code>for</code> y <code>if</code>, que ofrecen una sintaxis más clara, reactiva y alineada con el enfoque declarativo moderno.
+      </p>
+      <ul>
+        <li><strong>for:</strong> Iteración reactiva con tracking automático.</li>
+        <li><strong>if:</strong> Render condicional sin necesidad de <code>*ngIf</code>.</li>
+        <li><strong>Standalone:</strong> Componentes y directivas desacopladas de módulos, ideales para apps escalables.</li>
+      </ul>
+    </section>
+
+    <section class="bloque">
+      <h3 appResaltar>🔄 Pipes</h3>
+      <p>
+        Los <strong>Pipes</strong> permiten transformar datos directamente en el template. En Angular moderno, deben importarse explícitamente en el array <code>imports</code> del componente.
+      </p>
+      <ul>
+        <li><strong>DatePipe - shortDate: </strong> <code>{{ fecha() | date:'shortDate' }}</code></li>
+        <li><strong>DatePipe - shortTime: </strong> <code>{{ fecha() | date:'shortTime' }}</code></li>
+        <li><strong>CurrencyPipe: </strong> <code>{{ moneda | currency }}</code></li>
+      </ul>
+    </section>
+
+    <section class="bloque">
+      <h3 appResaltar>🎮 Juegos disponibles</h3>
+      <ul>
+        @for (juego of juegos(); track juego.id) {
+          <li>{{ juego.nombre }}</li>
+        }
+      </ul>
+    </section>
+
+    <section class="bloque">
+      <h3 appResaltar>🎨 Ejemplo de ngStyle y ngClass</h3>
+      <p>
+        Angular permite aplicar estilos y clases condicionales directamente en el template usando <code>[ngStyle]</code> y <code>[ngClass]</code>.
+      </p>
+    
+      <div
+        class="cuadro-estilo"
+        [ngStyle]="{ 'background-color': destacado() ? '#facc15' : '#4b0082', 'color': destacado() ? '#4b0082' : '#fff' }"
+        [ngClass]="{ 'borde-animado': destacado }"
+      >
+        Este cuadro cambia de color y estilo según la variable <code>destacado</code>.
+      </div>
+      <br>
+      <button (click)="toggleDestacado()" class="btn-custom">Alternar estilo</button>
+    </section>
+  }
+</div>

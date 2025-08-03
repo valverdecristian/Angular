@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "clase06Guards": {
+    "clase07Directivas": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/clase06-guards",
+            "outputPath": "dist/clase07-directivas",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -52,13 +52,7 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development.ts"
-                }
-              ]
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
@@ -67,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "clase06Guards:build:production"
+              "buildTarget": "clase07Directivas:build:production"
             },
             "development": {
-              "buildTarget": "clase06Guards:build:development"
+              "buildTarget": "clase07Directivas:build:development"
             }
           },
           "defaultConfiguration": "development"

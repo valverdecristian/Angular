@@ -1,0 +1,15 @@
+<div class="chat-wrapper">
+    <h2 class="titulo-chat">Bienvenido al chat</h2>
+
+    <div class="chat-container">
+    @for (mensaje of mensajes; track mensaje.id) {
+        <div class="mensaje" [@fadeIn]>
+        <div class="burbuja">
+            <div class="usuario">👤 {{ mensaje.id_usuario }}</div>
+            <div class="texto">{{ mensaje.mensaje }}</div>
+            <div class="fecha">{{ mensaje.created_at | date:'dd/MM/yyyy HH:mm:ss'}}</div>
+        </div>
+        </div>
+    }
+    </div>
+</div>

@@ -34,6 +34,12 @@ pages/, components/, services/, models/
 - para crear un guard:
 ng generate guard guards/mi-guard
 
+- variables de entorno
+ng generate environments
+
+- para usar el env convencional:
+npm i @types/node
+
 
 PASOS PARA UN PROYECTO NUEVO:
 1. ng new nombreProyecto

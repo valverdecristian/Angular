@@ -34,7 +34,7 @@ ng generate component NOMBRE_CARPETA/otra_carpeta
 
 ### 📍 Desde el HTML al TS
 
-- Event Blinding
+- Event Binding
 
 ## 📌 Directivas
 
@@ -56,6 +56,9 @@ ng generate component NOMBRE_CARPETA/otra_carpeta
 2) Se usan para validar (Validators), mostrar errores (FormControlName) y controlar campos dinámicos.
 
 ### 📍 Formularios por Template
+
+- Uso de `ngModel`, `#templateRef`, validaciones con `required`, `minlength`, etc.
+- Ideal para formularios simples y rapidos.
 
 ## 📌 Inyeccion de dependencias (DI)
 
@@ -120,7 +123,7 @@ ng generate service <RUTA AL ARCHIVO>
 
 ## 📌 Autenticacion
 
-### 📍 Autenticación con Supabase
+### 🔐 Autenticación con Supabase
 
 - Supabase provee un sistema de autenticación completo (registro, login, sesión, recuperación).
 - Utiliza JWT y permite autenticación con email/contraseña o OAuth (Google, GitHub, etc.).
@@ -134,6 +137,10 @@ supabase.auth.signUp({ email, password })
 // Iniciar sesión
 supabase.auth.signInWithPassword({ email, password })
 
+// manejar el estado de sesión
+supabase.auth.getSession() // o
+supabase.auth.onAuthStateChange()
+
 // Cerrar sesión
 supabase.auth.signOut()
 ```
@@ -143,14 +150,14 @@ supabase.auth.signOut()
 ### 📍 ¿Como podemos hacer una navegacion anidada / navegacion hija?
 
 - Usamos la propiedad `children` dentro del path principal.
-- Los componentes hijos se renderizan dentro del <router-outlet> del componente padre.
-- En el template del padre debe existir router-outlet
+- Los componentes hijos se renderizan dentro del `<router-outlet>` del componente padre.
+- En el template del padre debe existir `router-outlet`
 
-### 📍 Concepto de Lazy Loading (Carga Perezosa)
+### 🚀 Concepto de Lazy Loading (Carga Perezosa)
 
 - Significa que el componente/modulo se carga solo cuando se necesita (cuando se navega a esa ruta) no al inicio de la app.
-- Uso: para mejorar el rendimiento inicial de carga.
-- Se aplica a componentes con loadComponent o a modulos con loadChildren.
+- Uso: para mejorar el rendimiento inicial de carga (Time to Interactive).
+- Se aplica a componentes con `loadComponent` o a modulos con `loadChildren`.
 
 ```ts
 {
@@ -169,9 +176,11 @@ supabase.auth.signOut()
 }
 ```
 
-### 📍 Bloquear Rutas con Guards
+### 🛡️ Bloquear Rutas con Guards
 
-- canActate, canLoad, etc. (para proteger rutas)
+- canActivate, canLoad, etc. (para proteger rutas)
+- canDeactivate: para evitar que el usuario salga de una ruta sin guardar cambios.
+- resolve: para cargar datos antes de rendeizar el componente.
 - Se usan para controlar el acceso a rutas basándose en condiciones (por ejemplo si el usuario esta logueado)
 - Un `guard` es una clase que decide si una ruta puede ser accedida o no.
 - Si el guard devuelve un false o un observable que emite false, la navegacion se cancela.
@@ -183,4 +192,21 @@ supabase.auth.signOut()
     .then(m => m.AdminComponent),
   canActivate: [AuthGuard]
 }
+```
+
+## 📌 Pipes
+
+Permiten transformar datos directamente en el template.
+
+### 📍 Pipes nativos
+
+* `date`: formatear fechas.
+* `uppercase/lowercase`: convertir texto en mayusculas/minusculas.
+* `currency`: muestra valor monetario local.
+* `percent`: muestra porcentajes
+
+### 📍 Pipes personalizados
+
+```ts
+ng generate pipe nombre-del-pipe
 ```

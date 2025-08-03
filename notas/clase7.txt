@@ -1,0 +1,6 @@
+* Chat para el proyecto
+Creacion de nuevas tablas: usuarios y chat
+
+* Pipes
+
+* Directivas
