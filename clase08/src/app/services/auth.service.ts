@@ -1,6 +1,8 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { createClient, SupabaseClient, User } from '@supabase/supabase-js';
 import { Usuario } from '../models/usuario';
+import { Router } from '@angular/router';
+import { getLocaleMonthNames } from '@angular/common';
 
 // Inyeccion del servicio: hace que el servicio sea un singleton global
 @Injectable({
@@ -10,6 +12,7 @@ export class AuthService {
   supabase: SupabaseClient<any, 'public', any>;
   user = signal<User | null>(null);
   userDB = signal<Usuario | null>(null);
+  router = inject(Router);
   supabaseUrl = 'https://wtjylfdfdwowzzvunlpa.supabase.co';
   supabaseKey =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind0anlsZmRmZHdvd3p6dnVubHBhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4MDI0ODMsImV4cCI6MjA2ODM3ODQ4M30.fqCZIiw9N8PMjyCKCH1378bztIChdLfisXbEzbIkEfE';
@@ -17,10 +20,41 @@ export class AuthService {
   constructor() {
     // iniciador del cliente Supabase
     this.supabase = createClient(this.supabaseUrl, this.supabaseKey);
+
+    // detectar cuando se inicia o cierra sesion
+    this.supabase.auth.onAuthStateChange((event, session) => {
+      if (session === null) {
+        this.user.set(null);
+        this.userDB.set(null);
+        // this.router.navigateByUrl('/login');
+        return;
+      }
+
+      this.supabase.auth.getUser().then((respuestaUsuarioAuth) => {
+        this.user.set(respuestaUsuarioAuth.data.user);
+        this.supabase
+          .from('usuariosUID')
+          .select('*')
+          .eq('id', this.user()?.id)
+          .single()
+          .then((respuestaUsuarioDB) => {
+            this.userDB.set(respuestaUsuarioDB.data as Usuario);
+            console.log(this.user());
+            console.log(this.userDB());
+          });
+        // this.router.navigateByUrl('/home');
+      });
+    });
   }
 
   // registro de usuario: sugnUp() para crear la cuenta
-  async crearCuenta(email: string, password: string, nombre: string, apellido: string, edad: number) {
+  async crearCuenta(
+    email: string,
+    password: string,
+    nombre: string,
+    apellido: string,
+    edad: number
+  ) {
     const { data, error } = await this.supabase.auth.signUp({
       email: email,
       password: password,
@@ -35,7 +69,15 @@ export class AuthService {
   }
 
   // guardar datos en la base
-  private async crearUsuarioDB(uid: string, email: string, nombre: string, apellido: string, edad: number) {
+  // es private porque primero quiero que se cree el usuario con autenticacion
+  // y luego guardar los datos en la base de datos
+  private async crearUsuarioDB(
+    uid: string,
+    email: string,
+    nombre: string,
+    apellido: string,
+    edad: number
+  ) {
     // inserta los datos del usuario en una tabla personalizada
     const { data, error } = await this.supabase.from('usuariosUID').insert({
       id: uid,
@@ -58,6 +100,7 @@ export class AuthService {
     });
 
     if (error) {
+      console.log(error);
       throw error;
     }
   }
