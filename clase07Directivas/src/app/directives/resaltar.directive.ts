@@ -6,6 +6,7 @@ import { Directive, ElementRef, Renderer2, HostListener } from '@angular/core';
 export class ResaltarDirective {
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
+  // Estamos escuchando varios eventos del host
   @HostListener('mouseenter')
   onMouseEnter() {
     this.renderer.setStyle(this.el.nativeElement, 'color', '#facc15');

@@ -2,10 +2,12 @@ import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { JsonPipe } from '@angular/common';
+import { HighlightDirective } from './directives/highlight.directive';
+import { ResaltarDirective } from './directives/resaltar.directive';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, JsonPipe],
+  imports: [RouterOutlet, JsonPipe, ResaltarDirective],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -1,6 +1,6 @@
 <div class="fondo-violeta">
   <section class="bloque">
-    <h2 class="titulo">Crear usuario nuevo en la base de datos</h2>
+    <h2 class="titulo" appResaltar color="green">Crear usuario nuevo en la base de datos</h2>
   
     <div class="d-flex flex-wrap gap-3 justify-content-center">
       <button class="btn-custom" (click)="iniciarSesion()">Iniciar Sesión</button>
@@ -9,10 +9,10 @@
     </div>
   
     <div class="cuadro-estilo borde-animado">
-      <p>Usuario Auth:</p>
+      <p appResaltar color="red">Usuario Auth:</p>
       <code>{{ auth.user() | json }}</code>
   
-      <p>Usuario en DB</p>
+      <p appResaltar>Usuario en DB</p>
       <code>{{ auth.userDB() | json }}</code>
     </div>
   

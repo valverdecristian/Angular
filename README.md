@@ -210,3 +210,13 @@ Permiten transformar datos directamente en el template.
 ```ts
 ng generate pipe nombre-del-pipe
 ```
+
+## 📌 `@HostListener` en Angular
+
+Es un decorador que permite escuchar eventos del DOM (sin necesidad de usar addEventListener)
+
+### ✅ Buenas Practicas
+
+- Usar `Renderer2` junto con `@HostListener` para cambiar estilos, evitando modificar el DOM directamente.
+- Mantener el código dentro de los métodos corto y claro.
+- No abusar de eventos globales (window, document) para evitar afectar el rendimiento
