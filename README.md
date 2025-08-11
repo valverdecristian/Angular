@@ -220,3 +220,27 @@ Es un decorador que permite escuchar eventos del DOM (sin necesidad de usar addE
 - Usar `Renderer2` junto con `@HostListener` para cambiar estilos, evitando modificar el DOM directamente.
 - Mantener el código dentro de los métodos corto y claro.
 - No abusar de eventos globales (window, document) para evitar afectar el rendimiento
+
+## 📌 PWA
+
+Una PWA (Progressive Web App) es una aplicacion web que se comporta como una app nativa en dispositivos moviles y de escritorio.
+- Es una web que se puede instalar, usar offline, recibir notificaciones y que se cargue rápido.
+
+### 🧩 Funcionalidad
+
+* 📲 Instalacion: desde el navegador.
+* 📡 Offline: gracias al Service Worker.
+* 🔔 Notificaciones push: enviar notificaciones al usuario en todo momento.
+* ⚡ Carga rapida: usa caché inteligente.
+* 🧭 Experiencia nativa: se comporta como una app real.
+
+### 🛠️ ¿Cómo convertir tu app Angular en PWA?
+
+```bash
+ng add @angular/pwa
+```
+
+Esto agrega:
+- `manifest.webmanifest`: define ícono, nombre, colores, etc.
+- `ngsw-config.json`: configuración del Service Worker.
+- Archivos para caché, offline, instalación.
