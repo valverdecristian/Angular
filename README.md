@@ -13,9 +13,9 @@ ng generate component NOMBRE_CARPETA/otra_carpeta
 3. ngOnInit() — Se ejecuta una sola vez, cuando Angular ya terminó de inicializar el componente.
 4. ngDoCheck() — Se ejecuta cuando Angular verifica cambios (ciclo de detección).
 5. ngAfterContentInit() — Se ejecuta después de que el contenido del componente ha sido inicializado.
-5. ngOnDestroy() — Se ejecuta antes de destruir el componente, ideal para limpiar timers, subscripciones, etc.
+6. ngOnDestroy() — Se ejecuta antes de destruir el componente, ideal para limpiar timers, subscripciones, etc.
 
-- 🛠 IMPORTANTE: Angular recomienda que ESTOS METODOS SE USEN IMPLEMENTANDO LA *INTERFACE* CORRESPONDIENTE. Así ts nos avisara si olvidamos escribir dicho método.
+- 🛠 IMPORTANTE: Angular recomienda que ESTOS METODOS SE USEN IMPLEMENTANDO LA _INTERFACE_ CORRESPONDIENTE. Así ts nos avisara si olvidamos escribir dicho método.
 - Los mas usados serian: OnInit y OnDestroy.
 
 ### 📍 Comunicacion entre componentes
@@ -23,7 +23,6 @@ ng generate component NOMBRE_CARPETA/otra_carpeta
 - Input clasico (@input): Decorador para recibir datos del padre.
 - Input moderno (InputSignal): Nueva forma reactiva.
 - Output (@Output): Decorador para emitir eventos hacia el padre.
-
 
 ## 📌 Blindeo
 
@@ -39,21 +38,23 @@ ng generate component NOMBRE_CARPETA/otra_carpeta
 ## 📌 Directivas
 
 - Estructural
-    * Clasico: *ngIf, *ngFor, *ngSwitch
-    * Moderno: @if, @for, @switch, @case, @default
+
+  - Clasico: *ngIf, *ngFor, \*ngSwitch
+  - Moderno: @if, @for, @switch, @case, @default
 
 - Atributo
-    * cambian la apariencia o comportamiento de un elemento existente. ngClass, ngStyle
+
+  - cambian la apariencia o comportamiento de un elemento existente. ngClass, ngStyle
 
 - Personalizada
-    * Comportamiento definido por nosotros.
+  - Comportamiento definido por nosotros.
 
 ## 📌 Formularios
 
 ### 📍 Formularios Reactivos
 
-1) Estructura en ts: FormGroup, FormControl y FormBuilder
-2) Se usan para validar (Validators), mostrar errores (FormControlName) y controlar campos dinámicos.
+1. Estructura en ts: FormGroup, FormControl y FormBuilder
+2. Se usan para validar (Validators), mostrar errores (FormControlName) y controlar campos dinámicos.
 
 ### 📍 Formularios por Template
 
@@ -93,11 +94,11 @@ ng generate service <RUTA AL ARCHIVO>
 ### 📍 Servicios vs. Input/Output en Angular
 
 - ✅ Input/Output:
-	- Comunicación directa entre padre e hijo. Emitir eventos hacia arriba (al padre).
-	- Padre → Hijo → Padre (solo jerarquía directa)
+  - Comunicación directa entre padre e hijo. Emitir eventos hacia arriba (al padre).
+  - Padre → Hijo → Padre (solo jerarquía directa)
 - ✅ Servicios:
-	- Compartir estado entre componentes, logica de negocio y conexiones a APIs, datos persistentes y no hay relacion directa Padre-Hijo.
-	- Compartir estado global o logica entre componentes que no tienen jerarquia directa → todos usan la misma instancia (Singleton)
+  - Compartir estado entre componentes, logica de negocio y conexiones a APIs, datos persistentes y no hay relacion directa Padre-Hijo.
+  - Compartir estado global o logica entre componentes que no tienen jerarquia directa → todos usan la misma instancia (Singleton)
 
 ### 👉 Ejemplo real
 
@@ -109,17 +110,16 @@ ng generate service <RUTA AL ARCHIVO>
 ### 📍 Comunicación con servicios backend mediante HTTP
 
 - **`HttpClient`**:
-    - Para hacer peticiones HTTP (GET, POST, PUT, DELETE).
-        1) Estas peticiones retornan un **Observable**, por lo que debe suscribirse con `.suscribe()`.
-        2) Se recomienda usar **interceptores**.
-    - Se usa para conectar la app con APIs REST.
-    - Se debe configurar mediante inyección de dependencia.
-    - Para proyectos **standalone (Angular 15+)**, se debe agregar `provideHttpClient()` en `providers` del archivo **app.config.ts**.
-    - Funcion predeterminada: XMLHttpRequest
-    - Funciones opcionales:
-        1) withFetch()
-        2) withInterceptors()
-
+  - Para hacer peticiones HTTP (GET, POST, PUT, DELETE).
+    1. Estas peticiones retornan un **Observable**, por lo que debe suscribirse con `.suscribe()`.
+    2. Se recomienda usar **interceptores**.
+  - Se usa para conectar la app con APIs REST.
+  - Se debe configurar mediante inyección de dependencia.
+  - Para proyectos **standalone (Angular 15+)**, se debe agregar `provideHttpClient()` en `providers` del archivo **app.config.ts**.
+  - Funcion predeterminada: XMLHttpRequest
+  - Funciones opcionales:
+    1. withFetch()
+    2. withInterceptors()
 
 ## 📌 Autenticacion
 
@@ -132,17 +132,17 @@ ng generate service <RUTA AL ARCHIVO>
 
 ```ts
 // Crear cuenta
-supabase.auth.signUp({ email, password })
+supabase.auth.signUp({ email, password });
 
 // Iniciar sesión
-supabase.auth.signInWithPassword({ email, password })
+supabase.auth.signInWithPassword({ email, password });
 
 // manejar el estado de sesión
-supabase.auth.getSession() // o
-supabase.auth.onAuthStateChange()
+supabase.auth.getSession(); // o
+supabase.auth.onAuthStateChange();
 
 // Cerrar sesión
-supabase.auth.signOut()
+supabase.auth.signOut();
 ```
 
 ## 📌 Guards
@@ -168,6 +168,7 @@ supabase.auth.signOut()
 ```
 
 - Ejemplo con loadChildren (para modulos)
+
 ```ts
 {
   path: 'admin',
@@ -200,10 +201,10 @@ Permiten transformar datos directamente en el template.
 
 ### 📍 Pipes nativos
 
-* `date`: formatear fechas.
-* `uppercase/lowercase`: convertir texto en mayusculas/minusculas.
-* `currency`: muestra valor monetario local.
-* `percent`: muestra porcentajes
+- `date`: formatear fechas.
+- `uppercase/lowercase`: convertir texto en mayusculas/minusculas.
+- `currency`: muestra valor monetario local.
+- `percent`: muestra porcentajes
 
 ### 📍 Pipes personalizados
 
@@ -224,15 +225,16 @@ Es un decorador que permite escuchar eventos del DOM (sin necesidad de usar addE
 ## 📌 PWA
 
 Una PWA (Progressive Web App) es una aplicacion web que se comporta como una app nativa en dispositivos moviles y de escritorio.
+
 - Es una web que se puede instalar, usar offline, recibir notificaciones y que se cargue rápido.
 
 ### 🧩 Funcionalidad
 
-* 📲 Instalacion: desde el navegador.
-* 📡 Offline: gracias al Service Worker.
-* 🔔 Notificaciones push: enviar notificaciones al usuario en todo momento.
-* ⚡ Carga rapida: usa caché inteligente.
-* 🧭 Experiencia nativa: se comporta como una app real.
+- 📲 Instalacion: desde el navegador.
+- 📡 Offline: gracias al Service Worker.
+- 🔔 Notificaciones push: enviar notificaciones al usuario en todo momento.
+- ⚡ Carga rapida: usa caché inteligente.
+- 🧭 Experiencia nativa: se comporta como una app real.
 
 ### 🛠️ ¿Cómo convertir tu app Angular en PWA?
 
@@ -241,6 +243,122 @@ ng add @angular/pwa
 ```
 
 Esto agrega:
+
 - `manifest.webmanifest`: define ícono, nombre, colores, etc.
 - `ngsw-config.json`: configuración del Service Worker.
 - Archivos para caché, offline, instalación.
+
+## 📌 NestJS
+
+NestJS es un framework backend para `Node.js` que permite crear aplicaciones del lado del servidor con una arquitectura **modular, escalable y profesional**, inspirada en Angular.
+
+🚀 Ofrece estructura clara, inyección de dependencias, módulos reutilizables, servicios bien definidos y código limpio.
+
+### 🧩 Características
+
+- **Arquitectura modular**: organiza la app en `@Module`, `@Controller`, `@Service`.
+- **Inyección de dependencias**: gestiona instancias de clases automáticamente.
+- **TypeScript nativo**: tipado fuerte, decoradores, clases.
+- **Compatible con Express y Fastify**: puede usar distintos motores HTTP.
+- **Listo para APIs REST, GraphQL, WebSockets, JWT, etc.**
+- **Testing integrado**: unitario y e2e con Jest.
+- **Integraciones fáciles**: con bases de datos (TypeORM, Mongoose), colas de mensajes, autenticación, etc.
+- **Soporte para WebSockets**: ideal para chats o apps en tiempo real.
+- **CLI poderosa**: scaffolding de módulos, controladores, servicios.
+
+### 🎯 ¿Para qué lo usaría?
+
+- Crear APIs robustas y seguras.
+- Desarrollar microservicios, gateways WebSocket (para tiempo real), y apps híbridas (REST + tiempo real).
+- Backend profesional para proyectos Angular, React o móviles.
+
+### ⚙️ Instalación de NestJS
+
+1. Instalar la CLI de NestJS (globalmente)
+
+```bash
+npm i -g @nestjs/cli
+```
+
+2. Crear un nuevo proyecto NestJS
+
+```bash
+nest new nombre-del-proyecto
+```
+
+⚡️ Va a preguntar si queremos usar npm o yarn.
+
+3. Entrar al proyecto y levantar el servidor.
+
+```bash
+cd nombre-del-proyecto
+npm run start:dev
+```
+
+### 📦 Métodos HTTP en NestJS
+
+Los métodos HTTP se usan dentro de los **controladores** para definir como responde nuestro backend a las distintas solicitudes del cliente.
+
+```ts
+Import {
+    Get, Post, Put, Path, Delete
+} from '@nestjs/common';
+```
+
+### 🧩 Ejemplo básico en un controlador
+
+```ts
+@Controller("usuarios")
+export class UsuariosController {
+  @Get()
+  obtenerTodos() {
+    return this.usuariosService.findAll();
+  }
+
+  @Post()
+  crear(@Body() datos: CrearUsuarioDto) {
+    return this.usuariosService.create(datos);
+  }
+
+  @Put(":id")
+  actualizar(@Param("id") id: string, @Body() datos: ActualizarUsuarioDto) {
+    return this.usuariosService.update(id, datos);
+  }
+
+  @Delete(":id")
+  eliminar(@Param("id") id: string) {
+    return this.usuariosService.remove(id);
+  }
+}
+```
+
+#### 💡 Bonus
+
+`@Param()`: para capturar parámetros de ruta (``:id`).
+`@Body()`: para recibir datos enviados en el cuerpo del request.
+`@Query()`: para capturar parámetros tipo `?filtro=activo`.
+
+### 📍 Argumentos de Métodos HTTP
+
+👉 Aplica a cualquier metodo http
+
+```ts
+// Default
+@Get()
+```
+
+- Si el controlador es @Controller('gatos'), esta ruta responde a GET /gatos
+
+```ts
+// Con segmento dinamico
+@Get(':id')
+```
+
+- Captura el valor de `id` desde la URL
+- Ejemplo: `GET /gatos/42` -> `@Param('id')` devuelve `"42"`
+
+```ts
+// Especificando una ruta
+@Get('gatos/siames')
+@Get(['gatos', 'siames'])
+```

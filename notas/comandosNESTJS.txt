@@ -1,0 +1,50 @@
+Instalar Nest.js CLI
+npm i -g @nestjs/CLI
+
+Nuevo proyecto
+nest new nombre-proyecto
+
+🔥 para iniciar el servidor
+npm run start
+npm run start:dev  # con hot reload
+
+🧱 para crear un modulo
+nest g mo nombre
+
+🧩 Para crear un controlador (maneja rutas)
+nest g co nombre
+
+⚙️ Para crear un servicio (lógica de negocio)
+nest g s nombre
+
+📦 Para crear una clase (DTO, modelo, etc.)
+nest g cl nombre
+
+para crear un decorador
+nest g d nombre
+
+para crear un guard
+nest g gu nombre
+
+para crear un interceptor
+nest g in nombre
+
+para crear un pipe
+nest g pi nombre
+
+🐘 Para instalar dependencias como PostgreSQL:
+npm install @nestjs/typeorm typeorm pg
+
+🌱 Para usar variables de entorno:
+npm install @nestjs/config
+
+🔐 Para autenticación con JWT:
+npm install @nestjs/jwt passport-jwt
+
+METODOS HTTP comunes
+
+```bash
+Import {
+    Get, Post, Put, Path, Delete
+} from '@nestjs/common';
+```
