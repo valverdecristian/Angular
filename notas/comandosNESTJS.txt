@@ -32,6 +32,9 @@ nest g in nombre
 para crear un pipe
 nest g pi nombre
 
+para crear un resource (genera un CRUD)
+nest g res nombre
+
 🐘 Para instalar dependencias como PostgreSQL:
 npm install @nestjs/typeorm typeorm pg
 

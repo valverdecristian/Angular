@@ -1,3 +1,5 @@
+# 🚀 ANGULAR
+
 ## 📌 Componentes
 
 Los componentes son clases, pero las clases no son componentes. Todos los componentes son de instancia. La clase se convierte en un componente por el decorador @Component.
@@ -248,7 +250,9 @@ Esto agrega:
 - `ngsw-config.json`: configuración del Service Worker.
 - Archivos para caché, offline, instalación.
 
-## 📌 NestJS
+<br>
+
+# 🚀 NestJS
 
 NestJS es un framework backend para `Node.js` que permite crear aplicaciones del lado del servidor con una arquitectura **modular, escalable y profesional**, inspirada en Angular.
 
@@ -295,7 +299,7 @@ cd nombre-del-proyecto
 npm run start:dev
 ```
 
-### 📦 Métodos HTTP en NestJS
+## 📦 Métodos HTTP en NestJS
 
 Los métodos HTTP se usan dentro de los **controladores** para definir como responde nuestro backend a las distintas solicitudes del cliente.
 
@@ -334,13 +338,13 @@ export class UsuariosController {
 
 #### 💡 Bonus
 
-`@Param()`: para capturar parámetros de ruta (``:id`).
-`@Body()`: para recibir datos enviados en el cuerpo del request.
-`@Query()`: para capturar parámetros tipo `?filtro=activo`.
+- `@Param()`: para capturar parámetros de ruta (``:id`).
+- `@Body()`: para recibir datos enviados en el cuerpo del request.
+- `@Query()`: para capturar parámetros tipo `?filtro=activo`.
 
 ### 📍 Argumentos de Métodos HTTP
 
-👉 Aplica a cualquier metodo http
+👉 Aplica a cualquier metodo http (@Get(), @Post(), @Put(), @Delete())
 
 ```ts
 // Default
@@ -362,3 +366,40 @@ export class UsuariosController {
 @Get('gatos/siames')
 @Get(['gatos', 'siames'])
 ```
+
+## 📌 Módulos
+
+En NestJS, los módulos (`@Module`) son unidades organizativas, que agrupan componentes relacionados, como controladores, servicios, pipes, guards y otros modulos.
+Cada aplicacion tiene al menos un módulo raiz (`AppModule`), pero lo mejor es dividirla en multiples modulos.
+
+### 🧩 Estructura de un módulo
+
+```ts
+@Module({
+  imports: [OtroModulo], // Reutilizar funcionales de otros modulos o integrar librerias
+  controllers: [MiController], // Manejan las rutas HTTP. Recibe los datos del cliente. Decorador @Controller()
+  providers: [MiService], // Lógica de negocio. Decorador @Injectable() y se inyectan en los controladores
+  exports: [MiService], // Servicios que pueden ser usados por otros módulos
+})
+export class MiModulo {}
+```
+
+### 📍 DTO
+
+Un DTO (`Data Transfer Object`) es una clase que define la forma y estructura de los datos que se reciben o envian entre el cliente y el servidor.
+
+👉 Es como un contrato que dice: “si querés crear un usuario, estos son los campos que tenés que mandar, con estos tipos y validaciones”.
+
+#### 🧩 ¿Para qué sirve?
+
+- ✅ Validar los datos que llegan en el @Body().
+- ✅ Evitar errores por datos mal formateados.
+- ✅ Documentar claramente qué espera cada endpoint.
+- ✅ Separar la lógica de negocio de la estructura de datos.
+- ✅ Usar pipes como ValidationPipe para validar automáticamente.
+
+#### 🎯 ¿Cuándo usar DTOs?
+
+- En todos los endpoints que reciben datos (POST, PUT, PATCH).
+- Para definir claramente qué espera tu API.
+- Para proteger tu backend de datos maliciosos o incompletos.

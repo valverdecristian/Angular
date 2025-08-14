@@ -6,7 +6,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {} // inyeccion de dependencias
 
   @Get() // decorador con metodo HTTP GET
-  getHello(): string {
+  getHello() {
     return this.appService.getHello();
   }
 
