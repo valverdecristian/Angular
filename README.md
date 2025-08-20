@@ -2,29 +2,31 @@
 
 ## 📌 Componentes
 
-Los componentes son clases, pero las clases no son componentes. Todos los componentes son de instancia. La clase se convierte en un componente por el decorador @Component.
+Los componentes son clases, pero las clases no son componentes. Todos los componentes son de instancia. La clase se convierte en un componente por el decorador `@Component`.
 
 ```ts
-ng generate component NOMBRE_CARPETA/otra_carpeta
+ng g c nombre
 ```
 
 ### 📍 Ciclo de vida de un componente
 
-1. constructor() — Se ejecuta al crear la instancia de la clase (no accede aún al HTML).
-2. ngOnChanges() — Se ejecuta cuando cambian los inputs del componente (si hay @Input()).
-3. ngOnInit() — Se ejecuta una sola vez, cuando Angular ya terminó de inicializar el componente.
-4. ngDoCheck() — Se ejecuta cuando Angular verifica cambios (ciclo de detección).
-5. ngAfterContentInit() — Se ejecuta después de que el contenido del componente ha sido inicializado.
-6. ngOnDestroy() — Se ejecuta antes de destruir el componente, ideal para limpiar timers, subscripciones, etc.
+1. `constructor()` — Se ejecuta al crear la instancia de la clase (no accede aún al HTML).
+2. `ngOnChanges()` — Se ejecuta cuando cambian los inputs del componente (si hay `@Input()`).
+3. `ngOnInit()` — Se ejecuta una sola vez, cuando Angular ya terminó de inicializar el componente.
+4. `ngDoCheck()` — Se ejecuta cuando Angular verifica cambios (ciclo de detección).
+5. `ngAfterContentInit()` — Se ejecuta después de que el contenido del componente ha sido inicializado.
+6. `ngOnDestroy()` — Se ejecuta antes de destruir el componente, ideal para limpiar timers, subscripciones, etc.
 
-- 🛠 IMPORTANTE: Angular recomienda que ESTOS METODOS SE USEN IMPLEMENTANDO LA _INTERFACE_ CORRESPONDIENTE. Así ts nos avisara si olvidamos escribir dicho método.
-- Los mas usados serian: OnInit y OnDestroy.
+- 🛠 IMPORTANTE: Angular recomienda que estos **metodos** se usen implementando la **interface** correspondiente. Así TypeScript nos avisara si olvidamos escribir dicho método.
+- Los mas usados serian: `OnInit()` y `OnDestroy()`.
 
 ### 📍 Comunicacion entre componentes
 
-- Input clasico (@input): Decorador para recibir datos del padre.
-- Input moderno (InputSignal): Nueva forma reactiva.
-- Output (@Output): Decorador para emitir eventos hacia el padre.
+- Input clasico (`@input`): Decorador para recibir datos del padre.
+- Input moderno (`InputSignal`): Nueva forma reactiva.
+- Output (`@Output`): Decorador para emitir eventos hacia el padre.
+
+<br>
 
 ## 📌 Blindeo
 
@@ -37,19 +39,24 @@ ng generate component NOMBRE_CARPETA/otra_carpeta
 
 - Event Binding
 
+<br>
+
 ## 📌 Directivas
 
-- Estructural
+- **Estructural**
 
-  - Clasico: *ngIf, *ngFor, \*ngSwitch
+  - Clasico: `*ngIf`, `*ngFor`, `*ngSwitch`
   - Moderno: @if, @for, @switch, @case, @default
 
-- Atributo
+- **Atributo**
 
-  - cambian la apariencia o comportamiento de un elemento existente. ngClass, ngStyle
+  - Cambian la apariencia o comportamiento de un elemento existente. Ejemplo: `ngClass`, `ngStyle`
 
-- Personalizada
+- **Personalizada**
+
   - Comportamiento definido por nosotros.
+
+<br>
 
 ## 📌 Formularios
 
@@ -305,7 +312,7 @@ Los métodos HTTP se usan dentro de los **controladores** para definir como resp
 
 ```ts
 Import {
-    Get, Post, Put, Path, Delete
+    Get, Post, Put, Patch, Delete, Body, Param, Query
 } from '@nestjs/common';
 ```
 
@@ -403,3 +410,66 @@ Un DTO (`Data Transfer Object`) es una clase que define la forma y estructura de
 - En todos los endpoints que reciben datos (POST, PUT, PATCH).
 - Para definir claramente qué espera tu API.
 - Para proteger tu backend de datos maliciosos o incompletos.
+
+### 🛡️ Pipes y Guards
+
+- **Pipes**: transforman y validan datos antes de que lleguen al controlador. Ej: `ValidationPipe`.
+- **Guards**: controlan el acceso a rutas. Ej: `AuthGuard` para verificar si el usuario está autenticado.
+
+Se pueden aplicar a nivel de método, controlador o módulo.
+
+```ts
+@UseGuards(AuthGuard)
+@Get()
+obtenerPrivado() {
+  return 'Solo usuarios autenticados';
+}
+
+@UsePipes(ValidationPipe)
+@Post()
+crear(@Body() dto: CrearDto) {
+  return servicio.crear(dto);
+}
+```
+
+## 📌 Conexion a la Base de Datos
+
+### 📍 MongoDB
+
+- Al usar este comando se integra automaticamente con nestJS.
+
+```bash
+npm i @nestjs/mongoose mongoose
+```
+
+- Instalar el paquete de NestConfig para poder usar la variable de entorno.
+
+```bash
+npm i @nestjs/config
+```
+
+- Una vez instalado NestConfig crear el archivo `.env` para poder usar las variables luego.
+- Se debe importar NestConfig y Mongoose en `app.module.ts`.
+- Guardar la URI en una variable de entorno.
+
+```ts
+import { MongooseModule } from "@nestjs/mongoose";
+import { ConfigModule } from "@nestjs/config";
+
+@Module({
+  imports: [
+    ConfigModule.forRoot(),
+    MongooseModule.forRoot(process.env.MONGO_URI!),
+  ],
+  controllers: [],
+  providers: [],
+})
+export class AppModule {}
+```
+
+### 📍 Definicion de Esquemas
+
+- Nest usa decoradores para definir los **esquemas de MongoDB** usando decoradores.
+- `@Schema()`: marca una clase como esquema de MongoDB.
+- `@Prop()`: define cada propiedad y sus opciones (tipo, requerido, default, etc.).
+- 👉 Hay mas formas de crear un esquema.
