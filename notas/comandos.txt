@@ -40,6 +40,12 @@ ng generate environments
 - para usar el env convencional:
 npm i @types/node
 
+- para animación css:
+npm i animate.css
+
+- para conectar a supabase:
+npm i @supabase/supabase-js
+
 
 PASOS PARA UN PROYECTO NUEVO:
 1. ng new nombreProyecto

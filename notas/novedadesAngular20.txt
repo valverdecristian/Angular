@@ -1,0 +1,20 @@
+Pipes=
+NgModules=
+
+toSignal
+
+incremental hydration
+
+router-level render mode 
+
+developer preview
+
+effect, linkedSignal y toSignal como estables.
+
+abortSignal: para eliminar data que no me sirve (cuando me voy)
+
+httpResource utiliza httpClient
+
+Zoneless, angular por detras tiene Zone.js
+
+provideZonelessChangeDetection()

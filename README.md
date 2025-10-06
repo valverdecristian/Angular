@@ -1,5 +1,7 @@
 # 🚀 ANGULAR
 
+- Es un framework desarrollado por Google.
+
 ## 📌 Componentes
 
 Los componentes son clases, pero las clases no son componentes. Todos los componentes son de instancia. La clase se convierte en un componente por el decorador `@Component`.
@@ -34,10 +36,11 @@ ng g c nombre
 
 - Interpolacion: {{variable}}
 - Atributo: [atributo]="valor"
+- funciones: (funcion)="metodo()"
 
 ### 📍 Desde el HTML al TS
 
-- Event Binding
+- Event Binding:
 
 <br>
 
@@ -125,6 +128,7 @@ ng generate service <RUTA AL ARCHIVO>
   - Se usa para conectar la app con APIs REST.
   - Se debe configurar mediante inyección de dependencia.
   - Para proyectos **standalone (Angular 15+)**, se debe agregar `provideHttpClient()` en `providers` del archivo **app.config.ts**.
+  - Se debe cerrar la suscripcion con `.unsubscribe()`
   - Funcion predeterminada: XMLHttpRequest
   - Funciones opcionales:
     1. withFetch()
@@ -436,21 +440,22 @@ crear(@Body() dto: CrearDto) {
 
 ### 📍 MongoDB
 
-- Al usar este comando se integra automaticamente con nestJS.
+- Para integrar MongoDB con NestJS, se debe intalar el siguiente paquete:
 
 ```bash
 npm i @nestjs/mongoose mongoose
 ```
 
-- Instalar el paquete de NestConfig para poder usar la variable de entorno.
+- Tambien instalar el paquete de NestConfig para manejar variables de entorno.
 
 ```bash
 npm i @nestjs/config
 ```
 
-- Una vez instalado NestConfig crear el archivo `.env` para poder usar las variables luego.
-- Se debe importar NestConfig y Mongoose en `app.module.ts`.
+- Una vez instalado NestConfig crear el archivo `.env` (en la raiz del proyecto) para poder usar las variables luego.
 - Guardar la URI en una variable de entorno.
+- Se debe importar NestConfig y Mongoose en `app.module.ts`.
+- `isGlobal: true`: permite que el modulo de configuración (`ConfigModule`) este disponible **automáticamente en todos los módulos** del proyecto, **sin necesidad de importarlo nuevamente** cada vez que querés usar `process.env` o `ConfigService`
 
 ```ts
 import { MongooseModule } from "@nestjs/mongoose";
@@ -458,7 +463,8 @@ import { ConfigModule } from "@nestjs/config";
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    // actualizacion: se agrego { isGlobal: true }
+    ConfigModule.forRoot({ isGlobal: true }),
     MongooseModule.forRoot(process.env.MONGO_URI!),
   ],
   controllers: [],
@@ -469,7 +475,64 @@ export class AppModule {}
 
 ### 📍 Definicion de Esquemas
 
-- Nest usa decoradores para definir los **esquemas de MongoDB** usando decoradores.
-- `@Schema()`: marca una clase como esquema de MongoDB.
-- `@Prop()`: define cada propiedad y sus opciones (tipo, requerido, default, etc.).
+- Nest usa decoradores para definir los **esquemas de MongoDB** de forma declarativa y tipada.
+- PRINCIPALES DECORADORES:
+1. `@Schema()`: marca la clase como esquema de MongoDB.
+2. `@Prop()`: define cada propiedad y sus opciones (type, required, default, enum, etc).
 - 👉 Hay mas formas de crear un esquema.
+
+```ts
+// usuario.entity.ts
+
+export type UsuarioDocument = HydratedDocument<Usuario>; // se usa en nuestros servicios
+
+@Schema()
+export class Usuario {
+  @Prop({ required: true })
+  nombre: string;
+
+  @Prop({ required: true })
+  apellido: string;
+
+  @Prop({ required: true })
+  edad: number;
+}
+```
+
+- Luego se genera el esquema con:
+
+```ts
+export const UsuarioSchema = SchemaFactory.createForClass(Usuario);
+```
+
+
+### 📍 Registro del Esquema en el Módulo
+
+- **Esta parte es clave**: cada módulo que usa un modelo debe registrarlo con MongooseModule.forFeature(...)
+- Siguiendo el ejemplo se debe configurar en usuarios.module.ts:
+
+```ts
+import { Module } from '@nestjs/common';
+import { UsuariosService } from './usuarios.service';
+import { UsuariosController } from './usuarios.controller';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Usuario, UsuarioSchema } from './entities/usuario.entity';
+
+@Module({
+  imports: [
+    MongooseModule.forFeature([{ name: Usuario.name, schema: UsuarioSchema }]),
+  ],
+  controllers: [UsuariosController],
+  providers: [UsuariosService],
+})
+export class UsuariosModule {}
+```
+
+- 🔍 Esto permite que el modelo Usuario esté disponible para inyectarlo en el servicio (`usuarios.service.ts`) con @InjectModel(...).
+
+- en el servicio (`usuarios.service.ts`) usar UsuarioDocument como tipo generico para `Model<>`.
+- Usuario es solo la clase que define el esquema (las propiedades).
+- UsuarioDocument incluye además:
+  * Métodos de Mongoose (save(), populate(), etc.).
+  * Propiedades como _id, createdAt, updatedAt.
+  * Tipado completo del documento que devuelve la base de datos.

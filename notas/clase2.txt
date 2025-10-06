@@ -1,7 +1,7 @@
 CREAR EL PROYECTO DE LA CLASE 2
 ng new clase02
 css
-NO ServerSRender
+NO Server-Side-Rendering
 
 Estructura del proyecto:
 ng g c pages/bienvenida

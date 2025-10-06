@@ -36,11 +36,11 @@ componentes: los componentes son clases, pero las clases no son componentes. Tod
 router-outlet: etiqueta que le dice a Angular donde debe cargar los componentes de las rutas.
 binding/bindeo (enlace de datos):
 
-** blindeo desde ts al HTML: Se usa para mostrar datos del .ts en el HTML.
+** bindeo desde ts al HTML: Se usa para mostrar datos del .ts en el HTML.
 **** interpolación: {{variable}}
 **** atributo: [atributo]="valor"
 
-** blindeo desde el HTML a ts: Se usa para llamar funciones de la clase desde el HTML cuando ocurre un evento (como un clic). 📌 Esto se llama Event Binding. Se usan paréntesis () para capturar el evento y llamar un método de la clase.
+** bindeo desde el HTML a ts: Se usa para llamar funciones de la clase desde el HTML cuando ocurre un evento (como un clic). 📌 Esto se llama Event Binding. Se usan paréntesis () para capturar el evento y llamar un método de la clase.
 
 CREAR COMPONENTES (comandos)
 ng generate component NOMBRE_CARPETA/otra_carpeta
@@ -52,3 +52,6 @@ para usar routerLink se debe importar RouterLink en app.component.ts
 RESUMEN DE CLASE
 * como funciona y crear un componente
 * como crear y navegar las rutas
+
+
+no se puede usar la etiqurta a, se usa RouterLink
