@@ -2,34 +2,40 @@ import { Injectable } from '@nestjs/common';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { InjectModel } from '@nestjs/mongoose';
-import { Usuario } from './entities/usuario.entity';
+import { Usuario, UsuarioDocument } from './entities/usuario.entity';
 import { Model } from 'mongoose';
 
 @Injectable()
 export class UsuariosService {
-  constructor(
-    @InjectModel(Usuario.name) private usuarioModel: Model<Usuario>,
-  ) {}
+  // una vez inyectado el modelo, podemos usarlo en los metodos del servicio
+  constructor(@InjectModel(Usuario.name) private usuarioModel: Model<UsuarioDocument>,) {}
 
-  // hay muchas formas de hacer esto
-  async create(createUsuarioDto: CreateUsuarioDto): Promise<Usuario> {
+  // hay muchas formas de hacer esto (en el ejemplo usamos la forma clasica)
+  async create(createUsuarioDto: CreateUsuarioDto) {
     const createdUsuario = new this.usuarioModel(createUsuarioDto);
-    return createdUsuario.save();
+    return await createdUsuario.save();
   }
 
-  findAll() {
-    return `This action returns all usuarios`;
+  async findAll() {
+    return await this.usuarioModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} usuario`;
+  async findOne(id: number) {
+    return await this.usuarioModel.findById(id);
   }
 
-  update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
-    return `This action updates a #${id} usuario`;
+  // esto edita todos los que cumplen la condicion
+  // pero no lo elimina, crea un nuevo documento
+  async update(id: string, updateUsuarioDto: UpdateUsuarioDto) {
+    return await this.usuarioModel.updateOne(
+      {
+        _id: id,
+      },
+      { $set: updateUsuarioDto },
+    );
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} usuario`;
+  async remove(id: string) {
+    return await this.usuarioModel.deleteOne({ _id: id });
   }
 }

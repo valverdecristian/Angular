@@ -8,7 +8,7 @@ import { ConfigModule } from '@nestjs/config';
   // en esta parte agregamos mongoose en imports
   imports: [
     UsuariosModule,
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ isGlobal: true }),
     MongooseModule.forRoot(process.env.MONGO_URI!),
   ],
   controllers: [AppController],

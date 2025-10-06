@@ -7,6 +7,10 @@ export type UsuarioDocument = HydratedDocument<Usuario>;
 
 @Schema()
 export class Usuario {
+  // NO HACE FALTA DECLARARLO SI USAMOS EL COMPORTAMIENTO ESTANDAR DE MONGODB
+  // HydratedDocument<Usuario> ya incluye el _id:
+  // _id: Types.ObjectId;
+
   @Prop({ required: true })
   nombre: string;
 
