@@ -312,7 +312,7 @@ npm run start:dev
 
 ## 📦 Métodos HTTP en NestJS
 
-Los métodos HTTP se usan dentro de los **controladores** para definir como responde nuestro backend a las distintas solicitudes del cliente.
+Los métodos HTTP se usan dentro de los **controladores** para manejar las rutas:
 
 ```ts
 Import {
@@ -414,6 +414,72 @@ Un DTO (`Data Transfer Object`) es una clase que define la forma y estructura de
 - En todos los endpoints que reciben datos (POST, PUT, PATCH).
 - Para definir claramente qué espera tu API.
 - Para proteger tu backend de datos maliciosos o incompletos.
+
+### 🛡️ Validación de Datos
+
+Para asegurar que los datos de entrada (payload) sean correctos, NestJS utiliza DTOs junto con ValidationPipe.
+
+Para que la validacion funcione con los decoradores de clase, se necesitan dos paquetes:
+- class-validator: para usar los decoradores de validación como @IsString(), @IsInt, etc.
+- class-transformer: para transformar el objeto JSON de la petición en una instancia de la clase DTO
+
+```bash
+npm i --save class-validator class-transformer
+```
+
+#### Activacion global
+
+La mejor práctica es configurarlo **globalmente** para que se aplique a **todos** los endpoints de la aplicación, evitando repetirlo en cada controlador.
+
+```ts
+// main.ts
+
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  
+  // 🚀 Aplica el ValidationPipe globalmente
+  app.useGlobalPipes(
+    new ValidationPipe({
+      // Opciones clave para mayor seguridad y robustez
+      whitelist: true,         // 🛡️ Ignora y elimina propiedades que NO estén definidas en el DTO.
+      forbidNonWhitelisted: true, // 🛑 Lanza un error si hay propiedades no definidas en el DTO.
+      transform: true,         // 🔄 Asegura que los tipos se transformen al DTO.
+    }),
+  );
+
+  await app.listen(3000);
+}
+bootstrap();
+```
+
+- ✅ whitelist: true elimina silenciosamente cualquier campo que no esté definido en el DTO.
+- 🛑 Para que se lance un error ante campos no permitidos, agregá también forbidNonWhitelisted: true.
+
+#### Uso en el controlador
+
+Una vez configurado globalmente, solo necesitas usar el DTO en la firma del controlador. El Pipe hará el resto.
+
+```ts
+// usuarios.controller.ts
+import { Controller, Post, Body } from '@nestjs/common';
+import { CreateUsuarioDto } from './dto/crear-usuario.dto';
+
+@Controller('usuarios')
+export class UsuariosController {
+  @Post()
+  // El ValidationPipe global actúa automáticamente sobre @Body()
+  create(@Body() datos: CreateUsuarioDto) { 
+    // Si llegamos aquí, 'datos' ya está validado y es una instancia de CrearUsuarioDto
+    return this.usuariosService.create(datos);
+  }
+}
+```
+
+✅ Tip: Para que decoradores como @IsInt() y @Min() funcionen correctamente, activá transform: true en el ValidationPipe. Esto convierte automáticamente los tipos (por ejemplo, "42" → 42) antes de validar.
 
 ### 🛡️ Pipes y Guards
 
